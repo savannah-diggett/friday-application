@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savannah Diggett — Content Creator Application</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F6F1;
+    --paper: #FFFFFF;
+    --ink: #1F2A24;
+    --ink-soft: #45524A;
+    --green: #3E6259;
+    --green-deep: #2B463F;
+    --gold: #B98A2E;
+    --line: #E4E1D6;
+    --line-soft: #EDEBE1;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px 90px;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(36px, 6vw, 52px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 18px;
+    color: var(--green-deep);
+  }
+
+  .sub {
+    color: var(--ink-soft);
+    font-size: 18px;
+    max-width: 52ch;
+    line-height: 1.65;
+    margin: 0 0 46px;
+  }
+
+  /* --- Tab nav, inspired by a clean editorial top-nav --- */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 36px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tab {
+    background: none;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    padding: 12px 6px 14px;
+    margin-right: 22px;
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .tab::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--green);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  .tab[aria-selected="true"] {
+    color: var(--green-deep);
+  }
+  .tab[aria-selected="true"]::after { transform: scaleX(1); }
+
+  .tab:hover { color: var(--green-deep); }
+  .tab:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+
+  /* --- Content panel --- */
+  .panel {
+    background: var(--paper);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-lg);
+    padding: 40px 40px 44px;
+    box-shadow: 0 20px 45px -30px rgba(43, 70, 63, 0.25);
+  }
+
+  .panel[hidden] { display: none; }
+
+  .panel-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .panel h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 27px;
+    line-height: 1.35;
+    margin: 0 0 22px;
+    color: var(--green-deep);
+  }
+
+  .panel p {
+    line-height: 1.8;
+    color: var(--ink);
+    margin: 0 0 18px;
+    font-size: 16.5px;
+  }
+
+  .fade-in { animation: fadeIn 0.4s ease both; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* group headers inside social panel */
+  .group-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin: 30px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .group-title:first-of-type { margin-top: 4px; }
+  .group-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .link-list {
+    list-style: none;
+    margin: 0 0 4px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .link-list li {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .link-list li:last-child { border-bottom: none; }
+
+  .link-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .link-list a {
+    color: var(--green-deep);
+    background: #EEF3F0;
+    border: 1px solid #DCE6DF;
+    padding: 7px 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    display: inline-block;
+  }
+
+  .link-list a:hover {
+    background: #E1EBE4;
+    border-color: var(--green);
+  }
+
+  .link-note {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 4px 0 0 2px;
+    line-height: 1.6;
+  }
+
+  .handle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+
+  /* LinkedIn post styled as a card */
+  .post-card {
+    background: #FAFAF6;
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-md);
+    padding: 26px 26px 20px;
+    margin-top: 4px;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .post-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--gold));
+    flex-shrink: 0;
+  }
+
+  .post-meta-text { line-height: 1.3; }
+  .post-meta-text strong { font-size: 14.5px; color: var(--ink); }
+  .post-meta-text span {
+    display: block;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .post-body p { font-size: 16px; margin: 0 0 14px; color: var(--ink); line-height: 1.75; }
+  .post-body p:last-child { margin-bottom: 0; }
+
+  .post-footnote {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line-soft);
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .word-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--green);
+    letter-spacing: 0.05em;
+    margin-top: 16px;
+  }
+
+  /* CV panel */
+  .cv-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    background: #FAFAF6;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius-md);
+    padding: 30px;
+  }
+
+  .cv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--green-deep);
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 15.5px;
+    padding: 13px 24px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .cv-btn:hover { transform: translateY(-2px); background: var(--green); }
+
+  footer {
+    text-align: center;
+    margin-top: 44px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 44px 16px 70px; }
+    .panel { padding: 28px 22px 32px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Application — Content Creator Role</div>
+  <h1>Hi, I'm Savannah.</h1>
+  <p class="sub">Three answers and a CV, laid out clearly — everything you need to review is right here.</p>
+
+  <div class="tabs" role="tablist" aria-label="Application sections">
+    <button class="tab" role="tab" id="tab-platform" aria-controls="panel-platform" aria-selected="true">Favorite Platform</button>
+    <button class="tab" role="tab" id="tab-social" aria-controls="panel-social" aria-selected="false">Social Media</button>
+    <button class="tab" role="tab" id="tab-linkedin" aria-controls="panel-linkedin" aria-selected="false">LinkedIn Post</button>
+    <button class="tab" role="tab" id="tab-cv" aria-controls="panel-cv" aria-selected="false">My CV</button>
+  </div>
+
+  <!-- PANEL 1: Favorite Platform -->
+  <section class="panel fade-in" id="panel-platform" role="tabpanel" aria-labelledby="tab-platform">
+    <div class="panel-kicker">Question 01</div>
+    <h2>Which platform do you most enjoy creating content for — LinkedIn, Instagram, or TikTok — and why?</h2>
+    <p>I most enjoy creating content for <strong>Instagram</strong> because of the flexibility to create both static and dynamic content.</p>
+    <p>As I'm 23, Instagram has been around for as long as I've been old enough to have social media, so it feels familiar to me. I understand the platform well, and I feel like the content I create naturally resonates with people around my age.</p>
+    <p>Whereas LinkedIn is (mostly) built around written posts and TikTok is (mostly) centered on video content, Instagram gives me the flexibility to use either format depending on what best suits the message I'm trying to communicate.</p>
+    <p>It wouldn't make sense to create a dancing TikTok about a serious cybersecurity breach, and it wouldn't make sense to write a lengthy LinkedIn post about your coworker's birthday celebration. On Instagram, however, both topics could work — whether that's through a carousel, a Reel, or a Story. That versatility is what I enjoy most about creating content for the platform.</p>
+  </section>
+
+  <!-- PANEL 2: Social Media -->
+  <section class="panel fade-in" id="panel-social" role="tabpanel" aria-labelledby="tab-social" hidden>
+    <div class="panel-kicker">Question 02</div>
+    <h2>Links to social media accounts, portfolios, or content I've created</h2>
+
+    <div class="group-title">Paid Work</div>
+    <ul class="link-list">
+      <li>
+        <div class="link-row">
+          <span class="handle">LSE Department of Methodology</span>
+          <a href="https://www.instagram.com/lsemethodology/" target="_blank" rel="noopener">@lsemethodology</a>
+        </div>
+      </li>
+      <li><div class="link-row"><a href="https://www.instagram.com/lsemethodology/p/DU3aVP-DFwk/" target="_blank" rel="noopener">Carousel post 1</a></div></li>
+      <li><div class="link-row"><a href="https://www.instagram.com/reel/DaDCiICt-3K/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener">It's not all sunshine and rainbows</a></div></li>
+      <li>
+        <div class="link-row"><a href="https://www.instagram.com/reel/DY7GiFMtfm7/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener">Interview with Dr. Gildersleve (NLP Short Course)</a></div>
+        <p class="link-note">Coordinated the interview time with Dr. Gildersleve, wrote the script and questions, and attended the 4-hour short course.</p>
+      </li>
+      <li>
+        <div class="link-row"><a href="https://www.instagram.com/reel/DZFhTF3PSwT/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener">Study Break in Cambridge</a></div>
+        <p class="link-note">Experimented with voiceovers for this one.</p>
+      </li>
+      <li><div class="link-row"><a href="https://www.instagram.com/reel/DWGpJvYNyAO/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener">Department Day Trip to Brighton</a></div></li>
+      <li>
+        <div class="link-row"><a href="https://www.instagram.com/reel/DWQ2qhKoW7t/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener">Feeling Lucky to Be a Methodology Student? (St Patrick's Day Party)</a></div>
+        <p class="link-note">I organized this event — bought the decorations and set everything up.</p>
+      </li>
+      <li><div class="link-row"><a href="https://www.instagram.com/reel/DWyT0ZpNBUe/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener">Daylight Saving Time (Spring at LSE)</a></div></li>
+      <li><div class="link-row"><a href="https://www.instagram.com/reel/DWokqBSMO7x/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener">2026 Season Comes to an End</a></div></li>
+      <li>
+        <div class="link-row">
+          <span class="handle">LSE Alumni Event</span>
+          <a href="https://www.instagram.com/p/DU3aVP-DFwk/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener">Instagram carousel</a>
+          <a href="https://www.linkedin.com/posts/lse-department-of-methodology_lse-methodology-students-attended-an-alumni-activity-7431750115889127424--sJR?utm_source=share&utm_medium=member_desktop&rcm=ACoAADkpbVwBG0S-YPWc5Hkkn4kodZeLTLiPaJo" target="_blank" rel="noopener">LinkedIn post</a>
+        </div>
+      </li>
+      <li>
+        <div class="link-row">
+          <span class="handle">University of Nicosia — Global Semesters</span>
+          <a href="https://www.instagram.com/globalsemesters/" target="_blank" rel="noopener">@globalsemesters</a>
+        </div>
+      </li>
+    </ul>
+
+    <div class="group-title">Personal</div>
+    <ul class="link-list">
+      <li><div class="link-row"><span class="handle">Personal Instagram</span><a href="https://www.instagram.com/savdig/" target="_blank" rel="noopener">@savdig</a></div></li>
+      <li><div class="link-row"><span class="handle">Travel Instagram</span><a href="https://www.instagram.com/nomadicallysav/" target="_blank" rel="noopener">@nomadicallysav</a></div></li>
+      <li><div class="link-row"><span class="handle">LinkedIn</span><a href="https://www.linkedin.com/in/savannah-diggett-33820a229/" target="_blank" rel="noopener">Savannah Diggett</a></div></li>
+      <li><div class="link-row"><span class="handle">TikTok</span><a href="https://www.tiktok.com/@nomadicsav?_r=1&_t=ZP-97qLrocZTG3" target="_blank" rel="noopener">@nomadicsav</a></div></li>
+      <li>
+        <div class="link-row"><span class="handle">Travel Photography</span><a href="https://nomadicallysav.com/" target="_blank" rel="noopener">nomadicallysav.com</a></div>
+        <p class="link-note">A personal portfolio of photos I've taken for fun, and for hotels and tourism boards. I also designed the logo myself. The domain is currently mid-migration and may take up to 48 hours to resolve — so the site might appear down for now.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- PANEL 3: LinkedIn Post -->
+  <section class="panel fade-in" id="panel-linkedin" role="tabpanel" aria-labelledby="tab-linkedin" hidden>
+    <div class="panel-kicker">Question 03</div>
+    <h2>Why is trusted data more valuable than AI?</h2>
+
+    <div class="post-card">
+      <div class="post-meta">
+        <div class="post-avatar"></div>
+        <div class="post-meta-text">
+          <strong>Savannah Diggett</strong>
+          <span>LinkedIn Post · Application Draft</span>
+        </div>
+      </div>
+      <div class="post-body">
+        <p>You could drive across the country without a map.</p>
+        <p>You'd probably stop every now and then to ask for directions. You'd eventually get there… maybe.</p>
+        <p>Or you could open Google Maps and let it do the work.</p>
+        <p>Much quicker. Much easier.</p>
+        <p>But there's one catch. It only works if you put in the right destination.</p>
+        <p>Type the wrong address, and you'll still get somewhere. Just not where you wanted to be.</p>
+        <p>AI works in much the same way.</p>
+        <p>Everyone is focused on getting the latest model, the fastest tools, or the smartest assistant. But AI can only navigate using the information you give it.</p>
+        <p>If your data is incomplete, inaccurate, or scattered across systems no one understands, don't expect AI to magically point you in the right direction. It'll confidently take you somewhere else.</p>
+        <p>Good data governance isn't about slowing innovation down, going back to written maps. It's about making sure you've entered the right destination before you hit "Start."</p>
+        <p>Because the smartest navigation system in the world is only as good as the address you give it.</p>
+      </div>
+      <div class="post-footnote">Note: I used Google Maps as the example here because it's more commonly used than Apple Maps — but the platform itself isn't the point.</div>
+    </div>
+    <div class="word-count">~185 WORDS</div>
+  </section>
+
+  <!-- PANEL 4: CV -->
+  <section class="panel fade-in" id="panel-cv" role="tabpanel" aria-labelledby="tab-cv" hidden>
+    <div class="panel-kicker">Bonus</div>
+    <h2>My CV</h2>
+    <div class="cv-card">
+      <p style="margin:0; color:var(--ink); font-size:16px; line-height:1.7;">The full CV lives in this same GitHub repository — tap below to open it.</p>
+      <a class="cv-btn" href="./CV.pdf" target="_blank" rel="noopener">↓ View my CV</a>
+    </div>
+  </section>
+
+  <footer>friday-application · built for the content creator role</footer>
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('[role="tab"]');
+  const panels = document.querySelectorAll('[role="tabpanel"]');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+      panels.forEach(p => p.setAttribute('hidden', ''));
+
+      tab.setAttribute('aria-selected', 'true');
+      const panel = document.getElementById(tab.getAttribute('aria-controls'));
+      panel.removeAttribute('hidden');
+      panel.classList.remove('fade-in');
+      void panel.offsetWidth;
+      panel.classList.add('fade-in');
+    });
+  });
+</script>
+</body>
+</html>
