@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Savannah Diggett — Content & Marketing Assistant Application</title>
+<title>Savannah Diggett — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -41,22 +41,13 @@
     padding: 64px 24px 90px;
   }
 
-  .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 20px;
-  }
-
   h1 {
     font-family: 'Fraunces', serif;
     font-weight: 500;
     font-size: clamp(36px, 6vw, 52px);
     line-height: 1.12;
     letter-spacing: -0.01em;
-    margin: 0 0 18px;
+    margin: 0 0 14px;
     color: var(--green-deep);
   }
 
@@ -68,7 +59,7 @@
     margin: 0 0 46px;
   }
 
-  /* --- Tab nav, inspired by a clean editorial top-nav --- */
+  /* --- Tab nav --- */
   .tabs {
     display: flex;
     gap: 8px;
@@ -97,9 +88,7 @@
   .tab::after {
     content: "";
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1px;
+    left: 0; right: 0; bottom: -1px;
     height: 2px;
     background: var(--green);
     transform: scaleX(0);
@@ -107,11 +96,8 @@
     transition: transform 0.25s ease;
   }
 
-  .tab[aria-selected="true"] {
-    color: var(--green-deep);
-  }
+  .tab[aria-selected="true"] { color: var(--green-deep); }
   .tab[aria-selected="true"]::after { transform: scaleX(1); }
-
   .tab:hover { color: var(--green-deep); }
   .tab:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
 
@@ -125,15 +111,6 @@
   }
 
   .panel[hidden] { display: none; }
-
-  .panel-kicker {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11.5px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-  }
 
   .panel h2 {
     font-family: 'Fraunces', serif;
@@ -168,7 +145,7 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* group headers inside social panel */
+  /* group headers */
   .group-title {
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
@@ -243,58 +220,6 @@
     color: var(--ink-soft);
   }
 
-  /* LinkedIn post styled as a card */
-  .post-card {
-    background: #FAFAF6;
-    border: 1px solid var(--line-soft);
-    border-radius: var(--radius-md);
-    padding: 26px 26px 20px;
-    margin-top: 4px;
-  }
-
-  .post-meta {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 18px;
-  }
-
-  .post-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--green), var(--gold));
-    flex-shrink: 0;
-  }
-
-  .post-meta-text { line-height: 1.3; }
-  .post-meta-text strong { font-size: 14.5px; color: var(--ink); }
-  .post-meta-text span {
-    display: block;
-    font-size: 12.5px;
-    color: var(--ink-soft);
-  }
-
-  .post-body p { font-size: 16px; margin: 0 0 14px; color: var(--ink); line-height: 1.75; }
-  .post-body p:last-child { margin-bottom: 0; }
-
-  .post-footnote {
-    margin-top: 18px;
-    padding-top: 16px;
-    border-top: 1px solid var(--line-soft);
-    font-size: 13.5px;
-    color: var(--ink-soft);
-    font-style: italic;
-  }
-
-  .word-count {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11.5px;
-    color: var(--green);
-    letter-spacing: 0.05em;
-    margin-top: 16px;
-  }
-
   /* CV panel */
   .cv-card {
     display: flex;
@@ -344,32 +269,18 @@
 <body>
 <div class="wrap">
 
-  <div class="eyebrow">Application -  Content & Marketing Assistant </div>
-  <h1>Hi, I'm Savannah... </h1>
-  <p class="sub">and this is my application for the Content & Marketing Assistant position at Friday Initiatives.</p>
+  <h1>Hi, I'm Savannah.</h1>
+  <p class="sub">MSc Applied Social Data Science at LSE. Content creator, data scientist, and visual storyteller. Here's a bit of my work.</p>
 
-  <div class="tabs" role="tablist" aria-label="Application sections">
-    <button class="tab" role="tab" id="tab-platform" aria-controls="panel-platform" aria-selected="true">Favorite Platform</button>
-    <button class="tab" role="tab" id="tab-social" aria-controls="panel-social" aria-selected="false">Social Media</button>
-    <button class="tab" role="tab" id="tab-linkedin" aria-controls="panel-linkedin" aria-selected="false">LinkedIn Post</button>
+  <div class="tabs" role="tablist" aria-label="Portfolio sections">
+    <button class="tab" role="tab" id="tab-social" aria-controls="panel-social" aria-selected="true">Content & Social</button>
     <button class="tab" role="tab" id="tab-cv" aria-controls="panel-cv" aria-selected="false">My CV</button>
   </div>
 
-  <!-- PANEL 1: Favorite Platform -->
-  <section class="panel fade-in" id="panel-platform" role="tabpanel" aria-labelledby="tab-platform">
-    <div class="panel-kicker">Question 01</div>
-    <h2>Which platform do you most enjoy creating content for — LinkedIn, Instagram, or TikTok — and why?</h2>
-    <p>I most enjoy creating content for <strong>Instagram</strong> because of the flexibility to create both static and dynamic content.</p>
-    <p>As I'm 23, Instagram has been around for as long as I've been old enough to have social media, so it feels familiar to me. I understand the platform well, and I feel like the content I create naturally resonates with people around my age.</p>
-    <p>Whereas LinkedIn is (mostly) built around written posts and TikTok is (mostly) centered on video content, Instagram gives me the flexibility to use either format depending on what best suits the message I'm trying to communicate.</p>
-    <p>It wouldn't make sense to create a dancing TikTok about a serious cybersecurity breach, and it wouldn't make sense to write a lengthy LinkedIn post about your coworker's birthday celebration. On Instagram, however, both topics could work, whether that's through a carousel, a Reel, or a Story. That versatility is what I enjoy most about creating content for the platform.</p>
-  </section>
-
-  <!-- PANEL 2: Social Media -->
-  <section class="panel fade-in" id="panel-social" role="tabpanel" aria-labelledby="tab-social" hidden>
-    <div class="panel-kicker">Question 02</div>
-    <h2>Social Media/Content Links</h2>
-    <p class="section-note">Note: I planned most of the events I filmed content for, and for every reel that involves speaking, I wrote the script and questions myself.</p>
+  <!-- PANEL 1: Social Media -->
+  <section class="panel fade-in" id="panel-social" role="tabpanel" aria-labelledby="tab-social">
+    <h2>Social Media & Content</h2>
+    <p class="section-note">I planned most of the events I filmed content for, and for every reel that involves speaking, I wrote the script and questions myself.</p>
 
     <div class="group-title">Paid Work</div>
     <ul class="link-list">
@@ -416,54 +327,21 @@
       <li><div class="link-row"><span class="handle">TikTok</span><a href="https://www.tiktok.com/@nomadicsav?_r=1&_t=ZP-97qLrocZTG3" target="_blank" rel="noopener">@nomadicsav</a></div></li>
       <li>
         <div class="link-row"><span class="handle">Travel Photography</span><a href="https://nomadicallysav.com/" target="_blank" rel="noopener">nomadicallysav.com</a></div>
-        <p class="link-note">A personal portfolio of photos I've taken for fun, and for hotels and tourism boards. I also designed the logo myself. The domain is currently mid-migration and may take up to 48 hours to resolve, so the site might appear down for now.</p>
+        <p class="link-note">A personal portfolio of photos I've taken for fun, and for hotels and tourism boards. I also designed the logo myself.</p>
       </li>
     </ul>
   </section>
 
-  <!-- PANEL 3: LinkedIn Post -->
-  <section class="panel fade-in" id="panel-linkedin" role="tabpanel" aria-labelledby="tab-linkedin" hidden>
-    <div class="panel-kicker">Question 03</div>
-    <h2>Why is trusted data more valuable than AI?</h2>
-
-    <div class="post-card">
-      <div class="post-meta">
-        <div class="post-avatar"></div>
-        <div class="post-meta-text">
-          <strong>Savannah Diggett</strong>
-          <span>LinkedIn Post · Application </span>
-        </div>
-      </div>
-      <div class="post-body">
-        <p>You could drive across the country without a map.</p>
-        <p>You'd probably stop every now and then to ask for directions. You'd eventually get there… maybe.</p>
-        <p>Or you could open Google Maps and let it do the work.</p>
-        <p>Much quicker. Much easier.</p>
-        <p>But there's one catch. It only works if you put in the right destination.</p>
-        <p>Type the wrong address, and you'll still get somewhere. Just not where you wanted to be.</p>
-        <p>AI works in much the same way.</p>
-        <p>Everyone is focused on getting the latest model, the fastest tools, or the smartest assistant. But AI can only navigate using the information you give it.</p>
-        <p>If your data is incomplete, inaccurate, or scattered across systems no one understands, don't expect AI to magically point you in the right direction. It'll confidently take you somewhere else.</p>
-        <p>Good data governance isn't about slowing innovation down, going back to written maps. It's about making sure you've entered the right destination before you hit "Start."</p>
-        <p>Because the smartest navigation system in the world is only as good as the address you give it.</p>
-      </div>
-      <div class="post-footnote">Note: I used Google Maps as the example here because it's more commonly used than Apple Maps, but the platform itself isn't the point.</div>
-      <div class="post-footnote">It's interesting that this was the prompt because I was actually thinking about posting this exact idea earlier on my walk home from campus.</div>
-    </div>
-    <div class="word-count">~185 WORDS</div>
-  </section>
-
-  <!-- PANEL 4: CV -->
+  <!-- PANEL 2: CV -->
   <section class="panel fade-in" id="panel-cv" role="tabpanel" aria-labelledby="tab-cv" hidden>
-    <div class="panel-kicker">Bonus</div>
-    <h2> CV</h2>
+    <h2>CV</h2>
     <div class="cv-card">
-      <p style="margin:0; color:var(--ink); font-size:16px; line-height:1.7;"> for your convenience, I've attached my CV here... just in case!</p>
+      <p style="margin:0; color:var(--ink); font-size:16px; line-height:1.7;">For your convenience, I've attached my CV here.</p>
       <a class="cv-btn" href="./CV.pdf" target="_blank" rel="noopener">↓ View my CV</a>
     </div>
   </section>
 
-  <footer> Savannah Diggett </footer>
+  <footer>Savannah Diggett</footer>
 </div>
 
 <script>
